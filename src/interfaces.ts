@@ -6,7 +6,7 @@ export type Condition = string | string[] | RegExp | RegExp[] | ((url: string) =
 
 export interface FackerConfig {
   fackerUrl: string | FackerRplacer;
-  enabled: boolean;
+  enabled?: boolean;
   include?: any;
   exclude?: any;
 }

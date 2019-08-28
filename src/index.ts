@@ -14,7 +14,11 @@ function replaceUrl(url: string, fackerUrl: string | FackerRplacer, baseUrl: str
   if (typeof fackerUrl === 'function') {
     return fackerUrl(url);
   } else {
-    return url.replace(baseUrl, fackerUrl);
+    if (/^(http|https):\/\//.test(baseUrl)) {
+      return url.replace(baseUrl, fackerUrl);
+    } else {
+      return `${fackerUrl}/${baseUrl}`;
+    }
   }
 }
 
@@ -30,11 +34,9 @@ function match(url: string, config: FackerConfig): boolean {
 
 export default function createAxiosFacker(config: FackerConfig) {
   return (axios: AxiosStatic) => {
-    config = {
-      fackerUrl: window.location.origin,
-      enabled: true,
-      ...config
-    };
+    config = Object.assign({
+      enabled: true
+    }, config);
 
     checkUtils.checkConfig(config);
     if (!config.enabled) {
@@ -42,12 +44,12 @@ export default function createAxiosFacker(config: FackerConfig) {
     }
     axios.interceptors.request.use((conf: RequestConf) => {
       const { fackerUrl } = config;
-      const { baseUrl } = axios.defaults;
+      const { baseURL } = axios.defaults;
       const { url } = conf;
       const isMatch = match(url, config);
 
       if (isMatch) {
-        conf.url = replaceUrl(url, fackerUrl, baseUrl);
+        conf.url = replaceUrl(url, fackerUrl, baseURL);
       }
       return conf;
     });

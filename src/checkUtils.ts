@@ -9,7 +9,7 @@ export default {
       fackerUrl
     } = config;
 
-    if (!fackerUrl || typeof fackerUrl !== 'string' || typeof fackerUrl !== 'function') {
+    if (!fackerUrl || (typeof fackerUrl !== 'string' && typeof fackerUrl !== 'function')) {
       throw new Error('AxiosFacker config fackerUrl is required, and must be a string or function');
     }
   },

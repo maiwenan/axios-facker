@@ -27,7 +27,7 @@ const config = {
 		},
 		{ file: pkg.main, format: 'cjs', exports: 'named', sourcemap: true }, // CommonJS Modules
 		{ file: pkg.module, format: 'es', exports: 'named', sourcemap: true }, // ES Modules
-		{ file: pkg.types, format: 'es' }
+		// { file: pkg.types, format: 'es' }
 	]
 }
 
