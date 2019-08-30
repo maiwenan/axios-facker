@@ -4,9 +4,11 @@ import {
   FackerConfig,
   FackerRplacer,
   RequestConf
-} from './interfaces';
+} from './global';
 import helpers from './helpers';
 import checkUtils from './checkUtils';
+
+const urljoin = require('url-join');
 
 function replaceUrl(url: string, fackerUrl: string | FackerRplacer, baseUrl: string) {
   checkUtils.checkReplacer(fackerUrl, baseUrl);
@@ -14,10 +16,10 @@ function replaceUrl(url: string, fackerUrl: string | FackerRplacer, baseUrl: str
   if (typeof fackerUrl === 'function') {
     return fackerUrl(url);
   } else {
-    if (/^(http|https):\/\//.test(baseUrl)) {
+    if (/^(http|https):\/\//.test(url)) {
       return url.replace(baseUrl, fackerUrl);
     } else {
-      return `${fackerUrl}/${baseUrl}`;
+      return urljoin(fackerUrl, url);
     }
   }
 }

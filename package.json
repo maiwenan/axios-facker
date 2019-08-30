@@ -26,7 +26,7 @@
     "clean:build": "npx rimraf build",
     "clean": "npm run clean:dist & npm run clean:build",
     "build": "cross-env NODE_ENV=production npm run clean && rollup -c",
-    "test": "jest"
+    "test": "jest --testTimeout=50000"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
@@ -81,6 +81,6 @@
     ]
   },
   "dependencies": {
-    "vuex-wait": "^1.0.0"
+    "url-join": "^4.0.1"
   }
 }

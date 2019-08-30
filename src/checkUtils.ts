@@ -1,7 +1,7 @@
 import {
   FackerConfig,
   FackerRplacer
-} from './interfaces';
+} from './global';
 
 export default {
   checkConfig(config: FackerConfig) {

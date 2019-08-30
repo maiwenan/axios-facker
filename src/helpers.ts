@@ -1,7 +1,7 @@
 
 function str2reg(str: string | RegExp) {
   if (typeof str === 'string') {
-    return new RegExp(`^${str}$`);
+    return new RegExp(str);
   }
   return str;
 }
